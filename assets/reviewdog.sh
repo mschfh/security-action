@@ -15,7 +15,7 @@ if [ -n "${GITHUB_BASE_REF+set}" ]; then
 
     for runner in $RUNNERS; do
         cat $runner.log | reviewdog -reporter=github-pr-review -efm='%f:%l: %m'
-        cat $runner.log >> reviewdog.log
+        cat $runner.log | tee -a reviewdog.log
     done
 else
     find $SCRIPTPATH/../t3sts/ | sed "s|$SCRIPTPATH/../||g" | tr '\n' '\0' > $SCRIPTPATH/all_changed_files.txt
