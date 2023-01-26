@@ -45,8 +45,6 @@ runner:
     name: brakeman
     cmd: |
       set -ex
-      [ -f "$(find $SCRIPTPATH -type f -size +0 -name all_changed_files.txt)" ] &&\
-      xargs -0 -n1 -a $SCRIPTPATH/all_changed_files.txt | grep '^Gemfile\|\.rb$' &&\
       find . -name Gemfile.lock | xargs -0 -n1 dirname | sort -u &&\
       xargs -I{} ../.gem/bin/bundler exec brakeman {}
     format:
