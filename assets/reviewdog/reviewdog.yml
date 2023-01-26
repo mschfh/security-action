@@ -47,6 +47,6 @@ runner:
       set -ex
       [ -f "$(find $SCRIPTPATH -type f -size +0 -name all_changed_files.txt)" ] &&\
       xargs -0 -n1 -a $SCRIPTPATH/all_changed_files.txt | grep '^Gemfile\|\.rb$' &&\
-      ../.gem/bin/bundler exec brakeman
+      ../.gem/bin/bundler exec brakeman --force
     format:
       brakeman
