@@ -12,3 +12,10 @@ find . -name Gemfile.lock | xargs dirname | grep -v Gemfile.lock | sort -u &&\
       | sort -u | sed "s/$/Cc @brave\/sec-team $ASSIGNEES/g"
 
 ../.gem/bin/bundler exec brakeman --format json --no-exit-on-warn --no-exit-on-error t3sts/brakeman
+
+find . -name Gemfile.lock | xargs dirname | grep -v Gemfile.lock | sort -u &&\
+      xargs -IXXX ../.gem/bin/bundler exec brakeman --format json --no-exit-on-warn --no-exit-on-error XXX
+
+find . -name Gemfile.lock | xargs dirname | grep -v Gemfile.lock | sort -u &&\
+      xargs -IXXX ../.gem/bin/bundler exec brakeman --format json --no-exit-on-warn --no-exit-on-error XXX \
+      | jq -r '.warnings[] | "\(.file):\(.line) \(.message)<br><br>source: \(.link)<br><br>"'
