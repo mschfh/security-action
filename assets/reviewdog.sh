@@ -14,6 +14,7 @@ if [ -n "${GITHUB_BASE_REF+set}" ]; then
     done
 
     for runner in $RUNNERS; do
+        cat $runner.log
         cat $runner.log | reviewdog -reporter=github-pr-review -efm='%f:%l: %m'
         cat $runner.log >> reviewdog.log
     done

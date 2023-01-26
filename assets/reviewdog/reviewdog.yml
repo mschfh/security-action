@@ -45,7 +45,7 @@ runner:
     name: brakeman
     cmd: |
       set -ex
-      find . -name Gemfile.lock | xargs -0 -n1 dirname | sort -u &&\
+      find . -name Gemfile.lock | xargs -0 -n1 dirname | grep -v Gemfile.lock | sort -u &&\
       xargs -I{} ../.gem/bin/bundler exec brakeman --quiet --format tabs --no-exit-on-warn --no-exit-on-error {}
     format:
       brakeman
