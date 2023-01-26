@@ -68,7 +68,8 @@ runs:
       name: Install scanners
       shell: bash
       run: |
-        bundle install
+        GEM_HOME=../.gem gem install bundler
+        ../.gem/bin/bundle install
     - if: ${{ github.event_name == 'pull_request' && github.event.pull_request.draft == false && github.actor != 'dependabot[bot]' && (!matrix.language || matrix.language == 'generic') && inputs.debug}}
       env:
         ASSIGNEES: ${{steps.assignees.outputs.value}}
