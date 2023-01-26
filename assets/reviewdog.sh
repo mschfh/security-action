@@ -6,11 +6,11 @@ export SCRIPTPATH=`dirname $SCRIPT`
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-RUNNERS="safesvg tfsec semgrep"
+RUNNERS="safesvg brakeman"
 
 if [ -n "${GITHUB_BASE_REF+set}" ]; then
     for runner in $RUNNERS; do
-        reviewdog -reporter=local -runners=$runner -conf="$SCRIPTPATH/reviewdog/reviewdog.yml" -diff="git diff origin/$GITHUB_BASE_REF" > $runner.log
+        reviewdog -reporter=local -runners=$runner -conf="$SCRIPTPATH/reviewdog/reviewdog.yml" -diff="git diff origin/$GITHUB_BASE_REF" -tee > $runner.log
     done
 
     for runner in $RUNNERS; do
